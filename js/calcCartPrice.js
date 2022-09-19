@@ -1,31 +1,37 @@
 function calcCartPriceAndDelivery() {
-    const cartWrapper = document.querySelector('.cart-wrapper');
-    const priceElements = cartWrapper.querySelectorAll('.price__currency');
-    const priceTotalEl = document.querySelector('.total-price');
-    const deliveryCost = document.querySelector('.delivery-cost');
-    const cartDelivery = document.querySelector('[data-cart-delivery]');
+	const cartWrapper = document.querySelector('.cart-wrapper');
+	const priceElements = cartWrapper.querySelectorAll('.price__currency');
+	const totalPriceEl = document.querySelector('.total-price');
+	const deliveryCost = document.querySelector('.delivery-cost');
+	const cartDelivery = document.querySelector('[data-cart-delivery]');
 
-    let priceTotal = 0;
+	// Общая стоимость товаров
+	let priceTotal = 0;
 
-    priceElements.forEach(function (item) {
-        const amountEl = item.closest('.cart-item').querySelector('[data-counter]');
-        priceTotal += parseInt(item.innerText) * parseInt(amountEl.innerText);
-    });
+	// Обходим все блоки с ценами в корзине
+	priceElements.forEach(function (item) {
+		// Находим количество товара
+		const amountEl = item.closest('.cart-item').querySelector('[data-counter]');
+		// Добавляем стоимость товара в общую стоимость (кол-во * цену)
+		priceTotal += parseInt(item.innerText) * parseInt(amountEl.innerText);
+	});
 
-    priceTotalEl.innerText = priceTotal;
+	// Отображаем цену на странице
+	totalPriceEl.innerText = priceTotal;
 
-    if (priceTotal > 0) {
-        cartDelivery.classList.remove('none');
-    } else {
-        cartDelivery.classList.add('none');
-    }
+	// Скрываем / Показываем блок со стоимостью доставки
+	if (priceTotal > 0) {
+		cartDelivery.classList.remove('none');
+	} else {
+		cartDelivery.classList.add('none');
+	}
 
-    if (priceTotal >= 600) {
-        deliveryCost.classList.add('free');
-        deliveryCost.innerText = 'бесплатно';
-    } else {
-        deliveryCost.classList.remove('free');
-        deliveryCost.innerText = '250 ₴';
-    }
+	// Указываем стоимость доставки
+	if (priceTotal >= 600) {
+		deliveryCost.classList.add('free');
+		deliveryCost.innerText = 'бесплатно';
+	} else {
+		deliveryCost.classList.remove('free');
+		deliveryCost.innerText = '250 ₴';
+	}
 }
-
