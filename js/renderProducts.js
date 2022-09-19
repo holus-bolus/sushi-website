@@ -39,7 +39,7 @@ function renderProducts(productsArray) {
 								</div>
 
 								<button data-cart type="button" class="btn btn-block btn-outline-warning">
-									+ в корзину
+									+ в кошик
 								</button>
 
 							</div>
